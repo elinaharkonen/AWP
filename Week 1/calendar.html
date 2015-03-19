@@ -33,8 +33,8 @@ body{
 <body>
 <div id="tabs">
 		<ul> <!-- these are the tab headers -->
-		    <li><a href="XXX">add event</a></li> <!-- TODO: this header should open the 'add' tab -->
-		    <li><a href="XXX">view events</a></li> <!-- TODO: this header should open 'get.php' tab (see 'content via ajax' in the documentation)-->
+		    <li><a href="#add">add event</a></li> <!-- TODO: this header should open the 'add' tab -->
+		    <li><a href="get.php">view events</a></li> <!-- TODO: this header should open 'get.php' tab (see 'content via ajax' in the documentation)-->
 		</ul>
 		<div id="add">
 			<form action="save.php" method="post" name="addForm">
@@ -58,10 +58,28 @@ body{
 <script>
 $(function () {
 	// TODO: hide <div id="participant">
+	$('#participant').hide();
+	
 	// TODO: when <a id="plink"> is clicked, show <div id="participant">
-	// TODO: use jQuery UI to make a datpicker from <input name="date">
+	$('#plink').click(function(evt) {
+		evt.preventDefault();
+		$('#participant').show();
+	});
+	
+	// TODO: use jQuery UI to make a datepicker from <input name="date">
+		$('input[name=date]').datepicker();
+	
 	// TODO: get data from the form when submit button is clicked and use $.post function to send the data to save.php
+	$('form[name=addForm]').submit(function(evt) {
+		evt.preventDefault();
+		console.log($(this).serialize());
+		var data = $(this).serialize();
+			$.post('#save.php', data, function() {
+			alert('Event added.');
+		});
+	});
     // TODO: use jQuery UI to make tabs from <div id="tabs">
+	$('#tabs').tabs();
 });
 </script>
 </body>
