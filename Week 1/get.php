@@ -33,4 +33,8 @@ try {
 <script>
 // TODO: use jQuery UI to make an accordion from <div id="accordion">. 
 // Set 'collapsible' property to 'true' and 'active' property to 'none'
+$('#accordion').accordion({
+	collapsible:true,
+	active:'none'
+});
 </script>
