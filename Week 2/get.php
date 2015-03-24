@@ -24,6 +24,10 @@ try {
 		// create standard object which complies with this: http://fullcalendar.io/docs/event_data/Event_Object/
 		$event = new stdClass();
     	$event->start = $row->eDate;
+    	$event->title = $row->eName;
+    	$event->description = $row->eDescription;
+    	$event->email = $row->pEmail;
+    	$event->phone = $row->pPhone;
 		// TODO: you also need
 		// title
 		// description
@@ -44,6 +48,24 @@ try {
 var jsonEvents = <?php echo $eventsJSON; ?>;
 console.log(jsonEvents);
 // TODO: use jQuery FullCalendar plugin to display the events in a proper calendar
+
+$('#calendar').fullCalendar({
+	header:{
+		left:'month, basicWeek, basicDay',
+		center:'title',
+		right:'prev, next'
+	},
+	events: jsonEvents,
+		
+	eventClick: function(calEvent, jsEvent, view) {
+        alert('Event: ' + calEvent.title +
+		'\n Description: ' + calEvent.description +
+		'\n Email: ' + calEvent.email +
+		'\n Phone: ' +calEvent.phone);
+    },
+	timeFormat: 'H:mm'
+	
+});
 // calendar has to have at least month, week and day views
 // timeformat is 24-hour clock
 // when an event is clicked all the event details (jsonEvents) are displayed	
